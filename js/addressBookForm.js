@@ -1,29 +1,43 @@
-const fullName = document.querySelector('#fullName');
-const textError = document.querySelector('.text-error');
-fullName.addEventListener('input', function() {
-    let nameRegex = RegExp(/^[A-Z][a-z]{2,}/);
-    if (nameRegex.test(fullName.value))
-        textError.textContent = "";
-    else textError.textContent = "Name is Incorrect";
-});
+window.addEventListener('DOMContentLoaded', (event) => {
+    const fullName = document.querySelector('#fullName');
+    fullName.addEventListener('input', function() {
+        if (fullName.value.length == 0) {
+            setTextValue('.text-error', "");
+            return
+        }
+        try {
+            checkFullName(fullName.value)
+            setTextValue('.text-error', "");
+        } catch (e) {
+            setTextValue('.text-error', e);
+        }
+    });
 
-const address = document.querySelector('#address');
-const addressError = document.querySelector('.address-error');
-fullName.addEventListener('input', function() {
-    let words = address.split(" ");
-    let addressPattern = RegExp('([A-Z a-z 0-9]{3,})+');
-    for (const word of words) {
-        if (!addressPattern.test(word))
-            throw 'Invalid Address !';
-    }
-});
+    const phoneNo = document.querySelector('#tel');
+    phoneNo.addEventListener('input', function() {
+        if (phoneNo.value.length == 0) {
+            setTextValue('.mobno-error', "");
+            return;
+        }
+        try {
+            checkPhoneNo(phoneNo.value);
+            setTextValue('.mobno-error', "");
+        } catch (e) {
+            setTextValue('.mobno-error', e);
+        }
+    });
 
-
-const number = document.querySelector('#tel');
-const numberError = document.querySelector('.mobno-error');
-number.addEventListener('input', function() {
-    let numberRegex = RegExp('((^\\+? )(([0-9]{2,3})(\\s))?)' + '[0-9]{10,}$');
-    if (numberRegex.test(number.value))
-        numberError.textContent = "";
-    else numberError.textContent = "Mobile number is Incorrect";
+    const address = document.querySelector('#address');
+    address.addEventListener('input', function() {
+        if (address.value.length == 0) {
+            setTextValue('.address-error', "");
+            return;
+        }
+        try {
+            checkAddress(address.value);
+            setTextValue('.address-error', "");
+        } catch (e) {
+            setTextValue('.address-error', e);
+        }
+    });
 });
