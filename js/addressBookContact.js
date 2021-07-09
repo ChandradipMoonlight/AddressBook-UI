@@ -1,13 +1,20 @@
-class AddressBookContact {
+class addressBookContact {
 
     //Getters & Setters
+    get id() {
+        return this._id;
+    }
+
+    set id(id) {
+        this._id = id;
+    }
 
     get fullName() {
         return this._fullName;
     }
     set fullName(fullName) {
-        let fullNameRegex = RegExp(/^[A-Z][a-z]{2,}/);
-        if (fullNamePattern.test(fullName)) {
+        let fullNameRegex = RegEx('^[A-Z][a-z A-Z \\s]{2,}$');
+        if (fullNameRegex.test(fullName)) {
             this._fullName = fullName;
         } else
             throw 'Invalid FullName !';
